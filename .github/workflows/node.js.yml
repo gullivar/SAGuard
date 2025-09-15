@@ -1,0 +1,50 @@
+# GitHub Pages에 정적 콘텐츠를 배포하기 위한 간단한 워크플로우
+name: Deploy static content to Pages
+
+on:
+  # main 브랜치에 푸시될 때마다 실행됩니다.
+  push:
+    branches: ["main"]
+  # Actions 탭에서 수동으로 실행할 수 있도록 허용합니다.
+  workflow_dispatch:
+
+# GITHUB_TOKEN의 권한을 설정하여 GitHub Pages에 배포를 허용합니다.
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+# 동시에 하나의 배포만 실행되도록 허용합니다.
+concurrency:
+  group: "pages"
+  cancel-in-progress: true
+
+jobs:
+  # 배포만 수행하는 단일 작업
+  deploy:
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 18 # 사용하시는 Node.js 버전에 맞게 수정 가능
+      - name: Install dependencies
+        run: npm install
+      - name: Build
+        run: npm run build # React 앱 빌드 스크립트
+      - name: Setup Pages
+        uses: actions/configure-pages@v4
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          # build 폴더의 내용을 업로드합니다.
+          # Vite 사용 시 'dist' 폴더로 변경해야 할 수 있습니다.
+          path: './build' 
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
