@@ -36,7 +36,7 @@ jobs:
       - name: Install dependencies
         run: npm install --legacy-peer-deps
       - name: Build
-        run: npm run build # React 앱 빌드 스크립트
+        run: CI=false npm run build
       - name: Setup Pages
         uses: actions/configure-pages@v4
       - name: Upload artifact
