@@ -34,7 +34,7 @@ jobs:
         with:
           node-version: 18 # 사용하시는 Node.js 버전에 맞게 수정 가능
       - name: Install dependencies
-        run: npm install
+        run: npm install --legacy-peer-deps
       - name: Build
         run: npm run build # React 앱 빌드 스크립트
       - name: Setup Pages
