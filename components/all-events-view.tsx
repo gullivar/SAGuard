@@ -178,6 +178,7 @@ export default function AllEventsView({ ships, onBack }: AllEventsViewProps) {
                 <TableBody>
                   {filteredAndSortedEvents.map((event, index) => (
                     <TableRow key={`${event.timestamp}-${index}`}>
+<<<<<<< HEAD
                       <TableCell>
                         {new Date(event.timestamp).toLocaleString("en-GB", {
                           year: "numeric",
@@ -189,6 +190,9 @@ export default function AllEventsView({ ships, onBack }: AllEventsViewProps) {
                           hour12: false,
                         })}
                       </TableCell>
+=======
+                      <TableCell>{new Date(event.timestamp).toLocaleString()}</TableCell>
+>>>>>>> 635fb68316ea188d00a1ccbf846d7710502b0e5a
                       <TableCell>{event.type}</TableCell>
                       <TableCell>{event.shipName}</TableCell>
                       <TableCell>{getSeverityBadge(event.severity)}</TableCell>

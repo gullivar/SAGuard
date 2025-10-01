@@ -7,9 +7,12 @@ import { type Ship, generateDetailedShipData, generateShipData } from "@/lib/dat
 import ShipDetailView from "@/components/ship-detail-view"
 import AllEventsView from "@/components/all-events-view"
 import RasDetailView from "@/components/ras-detail-view"
+<<<<<<< HEAD
 import CriticalEventPopup from "@/components/critical-event-popup"
 import ActionResponseGuidePopup from "@/components/action-response-guide-popup"
 import { ActionStatusProvider } from "@/lib/action-status-context"
+=======
+>>>>>>> 635fb68316ea188d00a1ccbf846d7710502b0e5a
 
 const MapView = dynamic(() => import("@/components/map-view"), {
   ssr: false,
@@ -29,8 +32,11 @@ export default function DashboardPage() {
   const [allShips, setAllShips] = React.useState<Ship[]>([])
   const [isLoading, setIsLoading] = React.useState(true)
   const [isAuthenticated, setIsAuthenticated] = React.useState(false)
+<<<<<<< HEAD
   const [showCriticalPopup, setShowCriticalPopup] = React.useState(false)
   const [showActionGuide, setShowActionGuide] = React.useState(false)
+=======
+>>>>>>> 635fb68316ea188d00a1ccbf846d7710502b0e5a
   const searchParams = useSearchParams()
   const router = useRouter()
 
@@ -79,6 +85,7 @@ export default function DashboardPage() {
     }
   }, [searchParams, allShips.length, selectedShip?.id, isAuthenticated])
 
+<<<<<<< HEAD
   React.useEffect(() => {
     if (isAuthenticated && !isLoading) {
       const timer = setTimeout(() => {
@@ -89,6 +96,8 @@ export default function DashboardPage() {
     }
   }, [isAuthenticated, isLoading])
 
+=======
+>>>>>>> 635fb68316ea188d00a1ccbf846d7710502b0e5a
   if (!isAuthenticated) {
     return (
       <div className="w-full h-screen bg-background flex items-center justify-center text-foreground">
@@ -123,6 +132,7 @@ export default function DashboardPage() {
     setView("ras")
   }
 
+<<<<<<< HEAD
   const handleViewShipDetails = () => {
     setShowCriticalPopup(false)
     // Find the ship mentioned in the popup (MV-OCEAN-GUARDIAN)
@@ -154,6 +164,8 @@ export default function DashboardPage() {
     ],
   }
 
+=======
+>>>>>>> 635fb68316ea188d00a1ccbf846d7710502b0e5a
   if (isLoading) {
     return (
       <div className="w-full h-screen bg-background flex items-center justify-center text-foreground">
@@ -180,6 +192,7 @@ export default function DashboardPage() {
     }
   }
 
+<<<<<<< HEAD
   return (
     <ActionStatusProvider>
       <div className="relative w-full h-screen bg-background text-foreground overflow-hidden">
@@ -200,4 +213,7 @@ export default function DashboardPage() {
       </div>
     </ActionStatusProvider>
   )
+=======
+  return <div className="relative w-full h-screen bg-background text-foreground overflow-hidden">{renderView()}</div>
+>>>>>>> 635fb68316ea188d00a1ccbf846d7710502b0e5a
 }

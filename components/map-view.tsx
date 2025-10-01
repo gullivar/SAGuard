@@ -7,6 +7,7 @@ import RasStatusWidget from "@/components/widgets/ras-status-widget"
 import RefreshTimerWidget from "@/components/widgets/refresh-timer-widget"
 import { useTheme } from "next-themes"
 
+<<<<<<< HEAD
 const MapView = React.lazy(() =>
   import("./map-view-leaflet").catch((error) => {
     console.error("[v0] Failed to load map component:", error)
@@ -22,6 +23,9 @@ const MapView = React.lazy(() =>
     }
   }),
 )
+=======
+const MapView = React.lazy(() => import("./map-view-leaflet"))
+>>>>>>> 635fb68316ea188d00a1ccbf846d7710502b0e5a
 
 interface MapViewProps {
   ships: Ship[]
@@ -54,6 +58,7 @@ export default function MapViewWrapper({ ships, onSelectShip, onViewAllEvents }:
 
   return (
     <div className="w-full h-full relative">
+<<<<<<< HEAD
       <React.Suspense
         fallback={
           <div className="w-full h-full bg-muted animate-pulse flex items-center justify-center">
@@ -64,6 +69,9 @@ export default function MapViewWrapper({ ships, onSelectShip, onViewAllEvents }:
           </div>
         }
       >
+=======
+      <React.Suspense fallback={<div className="w-full h-full bg-muted animate-pulse" />}>
+>>>>>>> 635fb68316ea188d00a1ccbf846d7710502b0e5a
         <MapView ships={currentShips} onSelectShip={onSelectShip} onViewAllEvents={onViewAllEvents} theme={theme} />
       </React.Suspense>
       <div className="absolute top-4 left-4 z-[1000]">

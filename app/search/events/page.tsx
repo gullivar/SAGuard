@@ -127,6 +127,7 @@ export default function EventSearchPage() {
               <label className="text-sm font-medium mb-2 block">Date Range</label>
               <Popover>
                 <PopoverTrigger asChild>
+<<<<<<< HEAD
                   <Button
                     variant="outline"
                     className="w-full justify-start text-left font-normal bg-transparent text-xs px-2 py-1 h-8"
@@ -145,6 +146,21 @@ export default function EventSearchPage() {
                         "Select date range"
                       )}
                     </span>
+=======
+                  <Button variant="outline" className="w-full justify-start text-left font-normal bg-transparent">
+                    <CalendarIcon className="mr-2 h-4 w-4" />
+                    {dateRange?.from ? (
+                      dateRange.to ? (
+                        <>
+                          {format(dateRange.from, "yyyy-MM-dd")} - {format(dateRange.to, "yyyy-MM-dd")}
+                        </>
+                      ) : (
+                        format(dateRange.from, "yyyy-MM-dd")
+                      )
+                    ) : (
+                      <span>Select event date range</span>
+                    )}
+>>>>>>> 635fb68316ea188d00a1ccbf846d7710502b0e5a
                   </Button>
                 </PopoverTrigger>
                 <PopoverContent className="w-auto p-0" align="start">
@@ -162,7 +178,11 @@ export default function EventSearchPage() {
             <div>
               <label className="text-sm font-medium mb-2 block">Severity</label>
               <Select value={severity} onValueChange={setSeverity}>
+<<<<<<< HEAD
                 <SelectTrigger className="h-8 text-xs">
+=======
+                <SelectTrigger>
+>>>>>>> 635fb68316ea188d00a1ccbf846d7710502b0e5a
                   <SelectValue />
                 </SelectTrigger>
                 <SelectContent>
@@ -177,7 +197,11 @@ export default function EventSearchPage() {
             <div>
               <label className="text-sm font-medium mb-2 block">Ship/Asset</label>
               <Select value={selectedShipAsset} onValueChange={setSelectedShipAsset}>
+<<<<<<< HEAD
                 <SelectTrigger className="h-8 text-xs">
+=======
+                <SelectTrigger>
+>>>>>>> 635fb68316ea188d00a1ccbf846d7710502b0e5a
                   <SelectValue placeholder="Select ship or asset" />
                 </SelectTrigger>
                 <SelectContent className="max-h-60">
@@ -192,7 +216,11 @@ export default function EventSearchPage() {
             <div>
               <label className="text-sm font-medium mb-2 block">Investigation Status</label>
               <Select value={investigationStatus} onValueChange={setInvestigationStatus}>
+<<<<<<< HEAD
                 <SelectTrigger className="h-8 text-xs">
+=======
+                <SelectTrigger>
+>>>>>>> 635fb68316ea188d00a1ccbf846d7710502b0e5a
                   <SelectValue />
                 </SelectTrigger>
                 <SelectContent>
@@ -210,17 +238,29 @@ export default function EventSearchPage() {
                 placeholder="Detection rule, description, asset name, etc."
                 value={messageKeyword}
                 onChange={(e) => setMessageKeyword(e.target.value)}
+<<<<<<< HEAD
                 className="h-8 text-xs"
+=======
+>>>>>>> 635fb68316ea188d00a1ccbf846d7710502b0e5a
               />
             </div>
           </div>
           <div className="flex justify-end gap-2">
+<<<<<<< HEAD
             <Button variant="outline" onClick={resetFilters} className="h-8 text-xs px-2 bg-transparent">
               <RotateCcw className="w-3 h-3 mr-1" />
               Reset
             </Button>
             <Button className="h-8 text-xs px-2">
               <Search className="w-3 h-3 mr-1" />
+=======
+            <Button variant="outline" onClick={resetFilters}>
+              <RotateCcw className="w-4 h-4 mr-2" />
+              Reset
+            </Button>
+            <Button>
+              <Search className="w-4 h-4 mr-2" />
+>>>>>>> 635fb68316ea188d00a1ccbf846d7710502b0e5a
               Search
             </Button>
           </div>
@@ -331,7 +371,11 @@ export default function EventSearchPage() {
                                       handleStatusChange(selectedEvent.id, newStatus)
                                     }
                                   >
+<<<<<<< HEAD
                                     <SelectTrigger className="w-48 h-8 text-xs">
+=======
+                                    <SelectTrigger className="w-48">
+>>>>>>> 635fb68316ea188d00a1ccbf846d7710502b0e5a
                                       <SelectValue />
                                     </SelectTrigger>
                                     <SelectContent>

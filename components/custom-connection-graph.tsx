@@ -411,6 +411,7 @@ function GraphTooltip({ tooltipInfo, nodePositions, connections, cbs, onClose }:
                   <>
                     <td>{cbsMap.get(conn.cbsId)?.name}</td>
                     <td>{cbsMap.get(conn.cbsId)?.ip}</td>
+<<<<<<< HEAD
                     <td className="text-right">
                       {new Date(conn.connTime).toLocaleString("en-GB", {
                         day: "2-digit",
@@ -422,11 +423,15 @@ function GraphTooltip({ tooltipInfo, nodePositions, connections, cbs, onClose }:
                         hour12: false,
                       })}
                     </td>
+=======
+                    <td className="text-right">{new Date(conn.connTime).toLocaleTimeString("ko-KR")}</td>
+>>>>>>> 635fb68316ea188d00a1ccbf846d7710502b0e5a
                   </>
                 ) : (
                   <>
                     <td>{conn.userId}</td>
                     <td>
+<<<<<<< HEAD
                       {new Date(conn.connTime).toLocaleString("en-GB", {
                         day: "2-digit",
                         month: "2-digit",
@@ -434,6 +439,14 @@ function GraphTooltip({ tooltipInfo, nodePositions, connections, cbs, onClose }:
                         hour: "2-digit",
                         minute: "2-digit",
                         hour12: false,
+=======
+                      {new Date(conn.connTime).toLocaleString("ko-KR", {
+                        year: "2-digit",
+                        month: "2-digit",
+                        day: "2-digit",
+                        hour: "2-digit",
+                        minute: "2-digit",
+>>>>>>> 635fb68316ea188d00a1ccbf846d7710502b0e5a
                       })}
                     </td>
                     <td className="text-right">{conn.duration}</td>

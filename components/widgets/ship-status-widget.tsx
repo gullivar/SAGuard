@@ -12,13 +12,21 @@ export default function ShipStatusWidget({
 }: {
   ships: Ship[]
   onViewAllEvents: () => void
+<<<<<<< HEAD
   onFilterByStatus?: (status: "critical" | "warning" | "notice" | null) => void
+=======
+  onFilterByStatus?: (status: "critical" | "warning" | "ok" | null) => void
+>>>>>>> 635fb68316ea188d00a1ccbf846d7710502b0e5a
 }) {
   const statusCounts = React.useMemo(() => {
     const counts = {
       critical: 0,
       warning: 0,
+<<<<<<< HEAD
       notice: 0,
+=======
+      ok: 0,
+>>>>>>> 635fb68316ea188d00a1ccbf846d7710502b0e5a
     }
     ships.forEach((ship) => {
       const status = getOverallStatus(ship)
@@ -27,13 +35,21 @@ export default function ShipStatusWidget({
       } else if (["Warning", "Low Bandwidth"].includes(status)) {
         counts.warning++
       } else if (status === "OK") {
+<<<<<<< HEAD
         counts.notice++
+=======
+        counts.ok++
+>>>>>>> 635fb68316ea188d00a1ccbf846d7710502b0e5a
       }
     })
     return counts
   }, [ships])
 
+<<<<<<< HEAD
   const handleStatusClick = (status: "critical" | "warning" | "notice") => {
+=======
+  const handleStatusClick = (status: "critical" | "warning" | "ok") => {
+>>>>>>> 635fb68316ea188d00a1ccbf846d7710502b0e5a
     if (onFilterByStatus) {
       onFilterByStatus(status)
     }
@@ -68,6 +84,7 @@ export default function ShipStatusWidget({
         </div>
         <div
           className="flex items-center justify-between cursor-pointer hover:bg-muted/50 rounded p-1 -m-1 transition-colors"
+<<<<<<< HEAD
           onClick={() => handleStatusClick("notice")}
         >
           <div className="flex items-center gap-2">
@@ -75,6 +92,15 @@ export default function ShipStatusWidget({
             <span className="text-xs">Notice</span>
           </div>
           <span className="font-bold text-sm">{statusCounts.notice}</span>
+=======
+          onClick={() => handleStatusClick("ok")}
+        >
+          <div className="flex items-center gap-2">
+            <span className="h-3 w-3 rounded-full bg-green-500" />
+            <span className="text-xs">OK</span>
+          </div>
+          <span className="font-bold text-sm">{statusCounts.ok}</span>
+>>>>>>> 635fb68316ea188d00a1ccbf846d7710502b0e5a
         </div>
       </div>
       <div className="mt-3 pt-2 border-t border-border">

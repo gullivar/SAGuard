@@ -5,6 +5,10 @@ import type { Asset } from "@/lib/data"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import { Progress } from "@/components/ui/progress"
+<<<<<<< HEAD
+=======
+import { TrendingUp, ServerCrash, Thermometer, HardDrive } from "lucide-react"
+>>>>>>> 635fb68316ea188d00a1ccbf846d7710502b0e5a
 
 interface ResourceMonitoringProps {
   assets: Asset[]
@@ -275,6 +279,60 @@ export default function ResourceMonitoring({ assets, selectedAssetId, onAssetSel
         <CardTitle>Resource Monitoring</CardTitle>
       </CardHeader>
       <CardContent className="space-y-6">
+<<<<<<< HEAD
+=======
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+          <Card className="bg-muted/30">
+            <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
+              <CardTitle className="text-sm font-medium">High Load Systems</CardTitle>
+              <ServerCrash className="h-4 w-4 text-muted-foreground" />
+            </CardHeader>
+            <CardContent>
+              <div className="text-2xl font-bold">
+                {assets.filter((a) => (a.cpuUsage ?? 0) > 85 || (a.memoryUsage ?? 0) > 85).length}
+              </div>
+              <p className="text-xs text-muted-foreground">Assets over 85% utilization</p>
+            </CardContent>
+          </Card>
+          <Card className="bg-muted/30">
+            <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
+              <CardTitle className="text-sm font-medium">Avg. CPU</CardTitle>
+              <Thermometer className="h-4 w-4 text-muted-foreground" />
+            </CardHeader>
+            <CardContent>
+              <div className="text-2xl font-bold">
+                {(assets.reduce((sum, a) => sum + (a.cpuUsage ?? 0), 0) / assets.length).toFixed(1)}%
+              </div>
+              <p className="text-xs text-muted-foreground">Average CPU utilization</p>
+            </CardContent>
+          </Card>
+          <Card className="bg-muted/30">
+            <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
+              <CardTitle className="text-sm font-medium">Avg. Memory</CardTitle>
+              <TrendingUp className="h-4 w-4 text-muted-foreground" />
+            </CardHeader>
+            <CardContent>
+              <div className="text-2xl font-bold">
+                {(assets.reduce((sum, a) => sum + (a.memoryUsage ?? 0), 0) / assets.length).toFixed(1)}%
+              </div>
+              <p className="text-xs text-muted-foreground">Average memory utilization</p>
+            </CardContent>
+          </Card>
+          <Card className="bg-muted/30">
+            <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
+              <CardTitle className="text-sm font-medium">Avg. Disk</CardTitle>
+              <HardDrive className="h-4 w-4 text-muted-foreground" />
+            </CardHeader>
+            <CardContent>
+              <div className="text-2xl font-bold">
+                {(assets.reduce((sum, a) => sum + (a.diskUsage ?? 0), 0) / assets.length).toFixed(1)}%
+              </div>
+              <p className="text-xs text-muted-foreground">Average disk utilization</p>
+            </CardContent>
+          </Card>
+        </div>
+
+>>>>>>> 635fb68316ea188d00a1ccbf846d7710502b0e5a
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
           <div className="lg:col-span-1">
             <Tabs value={activeTab} onValueChange={(v) => setActiveTab(v as any)} className="w-full">

@@ -6,18 +6,26 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table"
 import { Button } from "@/components/ui/button"
 import { Badge } from "@/components/ui/badge"
+<<<<<<< HEAD
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import { RotateCcw, Calendar } from "lucide-react"
 import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover"
 import { Calendar as CalendarComponent } from "@/components/ui/calendar"
 import { MultiSelect } from "@/components/ui/multi-select"
+=======
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
+import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog"
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
+import { RotateCcw } from "lucide-react"
+>>>>>>> 635fb68316ea188d00a1ccbf846d7710502b0e5a
 
 interface AssetListProps {
   assets: Asset[]
 }
 
 export default function AssetList({ assets }: AssetListProps) {
+<<<<<<< HEAD
   const [selectedSystem, setSelectedSystem] = React.useState<string[]>([])
   const [selectedType, setSelectedType] = React.useState<string[]>([])
   const [selectedBrand, setSelectedBrand] = React.useState<string[]>([])
@@ -74,6 +82,47 @@ export default function AssetList({ assets }: AssetListProps) {
     setSelectedModel([])
     setFromDate(undefined)
     setToDate(undefined)
+=======
+  const [selectedSystem, setSelectedSystem] = React.useState("all")
+  const [selectedType, setSelectedType] = React.useState("all")
+  const [selectedBrand, setSelectedBrand] = React.useState("all")
+  const [selectedModel, setSelectedModel] = React.useState("all")
+  const [selectedAsset, setSelectedAsset] = React.useState<Asset | null>(null)
+  const [isModalOpen, setIsModalOpen] = React.useState(false)
+
+  const filteredAssets = React.useMemo(() => {
+    return assets.filter((asset) => {
+      const matchesSystem = selectedSystem === "all" || asset.system === selectedSystem
+      const matchesType = selectedType === "all" || asset.hwType === selectedType
+      const matchesBrand = selectedBrand === "all" || asset.manufacturer === selectedBrand
+      const matchesModel = selectedModel === "all" || asset.model === selectedModel
+
+      return matchesSystem && matchesType && matchesBrand && matchesModel
+    })
+  }, [assets, selectedSystem, selectedType, selectedBrand, selectedModel])
+
+  const uniqueSystems = React.useMemo(() => {
+    return ["all", ...new Set(assets.map((asset) => asset.system))].sort()
+  }, [assets])
+
+  const uniqueTypes = React.useMemo(() => {
+    return ["all", ...new Set(assets.map((asset) => asset.hwType))].sort()
+  }, [assets])
+
+  const uniqueBrands = React.useMemo(() => {
+    return ["all", ...new Set(assets.map((asset) => asset.manufacturer))].sort()
+  }, [assets])
+
+  const uniqueModels = React.useMemo(() => {
+    return ["all", ...new Set(assets.map((asset) => asset.model))].sort()
+  }, [assets])
+
+  const resetFilters = () => {
+    setSelectedSystem("all")
+    setSelectedType("all")
+    setSelectedBrand("all")
+    setSelectedModel("all")
+>>>>>>> 635fb68316ea188d00a1ccbf846d7710502b0e5a
   }
 
   const handleAssetDetail = (asset: Asset) => {
@@ -88,6 +137,7 @@ export default function AssetList({ assets }: AssetListProps) {
           <CardTitle className="text-blue-400">Asset List</CardTitle>
         </CardHeader>
         <CardContent>
+<<<<<<< HEAD
           <div className="grid grid-cols-1 md:grid-cols-7 gap-4 mb-4">
             <div>
               <Popover>
@@ -165,10 +215,92 @@ export default function AssetList({ assets }: AssetListProps) {
                 className="w-full bg-transparent h-8 text-xs px-2"
               >
                 <RotateCcw className="mr-1 h-3 w-3" />
+=======
+          <div className="grid grid-cols-1 md:grid-cols-5 gap-4 mb-4">
+            <div>
+              <Select value={selectedSystem} onValueChange={setSelectedSystem}>
+                <SelectTrigger className="bg-transparent">
+                  <SelectValue placeholder="All Systems" />
+                </SelectTrigger>
+                <SelectContent>
+                  <SelectItem value="all">All Systems</SelectItem>
+                  {uniqueSystems
+                    .filter((system) => system !== "all")
+                    .map((system) => (
+                      <SelectItem key={system} value={system}>
+                        {system}
+                      </SelectItem>
+                    ))}
+                </SelectContent>
+              </Select>
+            </div>
+
+            <div>
+              <Select value={selectedType} onValueChange={setSelectedType}>
+                <SelectTrigger className="bg-transparent">
+                  <SelectValue placeholder="All Hardware Types" />
+                </SelectTrigger>
+                <SelectContent>
+                  <SelectItem value="all">All Hardware Types</SelectItem>
+                  {uniqueTypes
+                    .filter((type) => type !== "all")
+                    .map((type) => (
+                      <SelectItem key={type} value={type}>
+                        {type}
+                      </SelectItem>
+                    ))}
+                </SelectContent>
+              </Select>
+            </div>
+
+            <div>
+              <Select value={selectedBrand} onValueChange={setSelectedBrand}>
+                <SelectTrigger className="bg-transparent">
+                  <SelectValue placeholder="All Brands" />
+                </SelectTrigger>
+                <SelectContent>
+                  <SelectItem value="all">All Brands</SelectItem>
+                  {uniqueBrands
+                    .filter((brand) => brand !== "all")
+                    .map((brand) => (
+                      <SelectItem key={brand} value={brand}>
+                        {brand}
+                      </SelectItem>
+                    ))}
+                </SelectContent>
+              </Select>
+            </div>
+
+            <div>
+              <Select value={selectedModel} onValueChange={setSelectedModel}>
+                <SelectTrigger className="bg-transparent">
+                  <SelectValue placeholder="All Models" />
+                </SelectTrigger>
+                <SelectContent>
+                  <SelectItem value="all">All Models</SelectItem>
+                  {uniqueModels
+                    .filter((model) => model !== "all")
+                    .map((model) => (
+                      <SelectItem key={model} value={model}>
+                        {model}
+                      </SelectItem>
+                    ))}
+                </SelectContent>
+              </Select>
+            </div>
+
+            <div>
+              <Button variant="outline" size="sm" onClick={resetFilters} className="w-full bg-transparent">
+                <RotateCcw className="mr-2 h-4 w-4" />
+>>>>>>> 635fb68316ea188d00a1ccbf846d7710502b0e5a
                 Reset
               </Button>
             </div>
           </div>
+<<<<<<< HEAD
+=======
+
+>>>>>>> 635fb68316ea188d00a1ccbf846d7710502b0e5a
           <div className="overflow-x-auto max-h-[400px]">
             <Table>
               <TableHeader className="sticky top-0 bg-muted">
@@ -207,17 +339,29 @@ export default function AssetList({ assets }: AssetListProps) {
           </div>
         </CardContent>
       </Card>
+<<<<<<< HEAD
+=======
+
+>>>>>>> 635fb68316ea188d00a1ccbf846d7710502b0e5a
       <Dialog open={isModalOpen} onOpenChange={setIsModalOpen}>
         <DialogContent className="max-w-4xl max-h-[80vh] overflow-y-auto">
           <DialogHeader>
             <DialogTitle>Asset Details - {selectedAsset?.function}</DialogTitle>
           </DialogHeader>
+<<<<<<< HEAD
+=======
+
+>>>>>>> 635fb68316ea188d00a1ccbf846d7710502b0e5a
           {selectedAsset && (
             <Tabs defaultValue="hardware" className="w-full">
               <TabsList className="grid w-full grid-cols-2">
                 <TabsTrigger value="hardware">Hardware Details</TabsTrigger>
                 <TabsTrigger value="software">Installed Software</TabsTrigger>
               </TabsList>
+<<<<<<< HEAD
+=======
+
+>>>>>>> 635fb68316ea188d00a1ccbf846d7710502b0e5a
               <TabsContent value="hardware" className="space-y-4">
                 <div className="grid grid-cols-2 gap-4">
                   <div>
@@ -246,6 +390,10 @@ export default function AssetList({ assets }: AssetListProps) {
                       </div>
                     </div>
                   </div>
+<<<<<<< HEAD
+=======
+
+>>>>>>> 635fb68316ea188d00a1ccbf846d7710502b0e5a
                   <div>
                     <h4 className="font-semibold mb-2">Network Information</h4>
                     <div className="space-y-2 text-sm">
@@ -256,6 +404,7 @@ export default function AssetList({ assets }: AssetListProps) {
                         <strong>Subnet Mask:</strong> {selectedAsset.subnetMask || "N/A"}
                       </div>
                       <div>
+<<<<<<< HEAD
                         <strong>MAC Address:</strong> {selectedAsset.macAddress || "N/A"}
                       </div>
                       <div>
@@ -263,16 +412,33 @@ export default function AssetList({ assets }: AssetListProps) {
                       </div>
                       <div>
                         <strong>Serial Number:</strong> {selectedAsset.serialNumber || "N/A"}
+=======
+                        <strong>MAC Address:</strong> 00:1B:44:11:3A:B7
+                      </div>
+                      <div>
+                        <strong>Firmware Version:</strong> v2.1.4
+                      </div>
+                      <div>
+                        <strong>Serial Number:</strong> SN{Math.floor(100000 + Math.random() * 900000)}
+>>>>>>> 635fb68316ea188d00a1ccbf846d7710502b0e5a
                       </div>
                     </div>
                   </div>
                 </div>
+<<<<<<< HEAD
+=======
+
+>>>>>>> 635fb68316ea188d00a1ccbf846d7710502b0e5a
                 {selectedAsset.description && (
                   <div>
                     <h4 className="font-semibold mb-2">Description</h4>
                     <p className="text-sm">{selectedAsset.description}</p>
                   </div>
                 )}
+<<<<<<< HEAD
+=======
+
+>>>>>>> 635fb68316ea188d00a1ccbf846d7710502b0e5a
                 {selectedAsset.remarks && (
                   <div>
                     <h4 className="font-semibold mb-2">Remarks</h4>
@@ -280,6 +446,10 @@ export default function AssetList({ assets }: AssetListProps) {
                   </div>
                 )}
               </TabsContent>
+<<<<<<< HEAD
+=======
+
+>>>>>>> 635fb68316ea188d00a1ccbf846d7710502b0e5a
               <TabsContent value="software" className="space-y-4">
                 <div>
                   <h4 className="font-semibold mb-4">Installed Software</h4>

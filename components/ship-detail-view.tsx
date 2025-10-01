@@ -4,7 +4,11 @@ import * as React from "react"
 import { useRouter } from "next/navigation"
 import type { Ship, Asset } from "@/lib/data"
 import { Button } from "@/components/ui/button"
+<<<<<<< HEAD
 import { ArrowLeft, LayoutDashboard } from "lucide-react"
+=======
+import { ArrowLeft } from "lucide-react"
+>>>>>>> 635fb68316ea188d00a1ccbf846d7710502b0e5a
 import RasSummary from "@/components/ship-detail/ras-summary"
 import SecurityEventSummary from "@/components/ship-detail/security-event-summary"
 import NetworkTopology from "@/components/ship-detail/network-topology"
@@ -62,10 +66,13 @@ export default function ShipDetailView({ ship, onBack, onViewRasDetails, statusF
     }
   }
 
+<<<<<<< HEAD
   const handleDashboardClick = () => {
     router.push("/")
   }
 
+=======
+>>>>>>> 635fb68316ea188d00a1ccbf846d7710502b0e5a
   if (!ship) {
     return (
       <div className="w-full h-screen flex items-center justify-center">
@@ -81,6 +88,7 @@ export default function ShipDetailView({ ship, onBack, onViewRasDetails, statusF
     <>
       <div className="w-full h-full p-4 md:p-6 overflow-y-auto bg-background text-foreground">
         <div className="max-w-7xl mx-auto">
+<<<<<<< HEAD
           <div className="flex gap-2 mb-4">
             <Button
               onClick={handleBackClick}
@@ -101,6 +109,17 @@ export default function ShipDetailView({ ship, onBack, onViewRasDetails, statusF
               Dashboard
             </Button>
           </div>
+=======
+          <Button
+            onClick={handleBackClick}
+            variant="outline"
+            className="mb-4 bg-transparent hover:bg-accent hover:text-accent-foreground"
+            type="button"
+          >
+            <ArrowLeft className="mr-2 h-4 w-4" />
+            Back to Map
+          </Button>
+>>>>>>> 635fb68316ea188d00a1ccbf846d7710502b0e5a
 
           <h1 className="text-2xl md:text-3xl font-bold mb-6">
             {ship.name} ({ship.id}) - Ship Detail

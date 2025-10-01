@@ -6,6 +6,7 @@ import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@
 import { Input } from "@/components/ui/input"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
 import { Button } from "@/components/ui/button"
+<<<<<<< HEAD
 import { ArrowUpDown, X, Calendar } from "lucide-react"
 import { Badge } from "@/components/ui/badge"
 import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover"
@@ -34,11 +35,36 @@ export default function EventList({ events, filters, setFilters, statusFilter }:
     dateTo: undefined as Date | undefined,
   })
 
+=======
+import { ArrowUpDown, X } from "lucide-react"
+import { Badge } from "@/components/ui/badge"
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from "@/components/ui/dialog"
+import { recommendationsData } from "@/lib/data"
+
+interface EventListProps {
+  events: any[]
+  filters: { severity: string; type: string; search: string }
+  setFilters: React.Dispatch<React.SetStateAction<{ severity: string; type: string; search: string }>>
+  statusFilter?: "critical" | "warning" | "ok" | null
+}
+
+type SortKey = "timestamp" | "type" | "cbsName" | "severity"
+
+export default function EventList({ events, filters, setFilters, statusFilter }: EventListProps) {
+>>>>>>> 635fb68316ea188d00a1ccbf846d7710502b0e5a
   const [sort, setSort] = React.useState<{ key: SortKey; direction: "asc" | "desc" }>({
     key: "timestamp",
     direction: "desc",
   })
 
+<<<<<<< HEAD
   const [selectedEventData, setSelectedEventData] = React.useState<{
     ruleName: string
     ruleDescription: string
@@ -58,6 +84,8 @@ export default function EventList({ events, filters, setFilters, statusFilter }:
     setEventStatuses(initialStatuses)
   }, [events])
 
+=======
+>>>>>>> 635fb68316ea188d00a1ccbf846d7710502b0e5a
   const handleSort = (key: SortKey) => {
     setSort((prev) => ({
       key,
@@ -90,12 +118,15 @@ export default function EventList({ events, filters, setFilters, statusFilter }:
     return recommendations.join("\n• ")
   }
 
+<<<<<<< HEAD
   const [multiFilters, setMultiFilters] = React.useState({
     severity: [] as string[],
     actionStatus: [] as string[],
     search: "",
   })
 
+=======
+>>>>>>> 635fb68316ea188d00a1ccbf846d7710502b0e5a
   const filteredAndSortedEvents = React.useMemo(() => {
     let filtered = [...events]
 
@@ -106,13 +137,19 @@ export default function EventList({ events, filters, setFilters, statusFilter }:
           return severity === "critical"
         } else if (statusFilter === "warning") {
           return severity === "warning"
+<<<<<<< HEAD
         } else if (statusFilter === "notice") {
           return severity === "notice"
+=======
+        } else if (statusFilter === "ok") {
+          return severity === "notice" // OK status shows only notice events
+>>>>>>> 635fb68316ea188d00a1ccbf846d7710502b0e5a
         }
         return true
       })
     }
 
+<<<<<<< HEAD
     if (multiFilters.severity.length > 0) {
       filtered = filtered.filter((event) => multiFilters.severity.includes(event.severity))
     }
@@ -124,6 +161,16 @@ export default function EventList({ events, filters, setFilters, statusFilter }:
     }
     if (multiFilters.search) {
       const searchLower = multiFilters.search.toLowerCase()
+=======
+    if (filters.severity) {
+      filtered = filtered.filter((event) => event.severity === filters.severity)
+    }
+    if (filters.type) {
+      filtered = filtered.filter((event) => event.type === filters.type)
+    }
+    if (filters.search) {
+      const searchLower = filters.search.toLowerCase()
+>>>>>>> 635fb68316ea188d00a1ccbf846d7710502b0e5a
       filtered = filtered.filter(
         (event) =>
           event.eventName.toLowerCase().includes(searchLower) ||
@@ -132,6 +179,7 @@ export default function EventList({ events, filters, setFilters, statusFilter }:
       )
     }
 
+<<<<<<< HEAD
     if (dateFilters.dateFrom) {
       filtered = filtered.filter((event) => new Date(event.timestamp) >= dateFilters.dateFrom!)
     }
@@ -139,6 +187,8 @@ export default function EventList({ events, filters, setFilters, statusFilter }:
       filtered = filtered.filter((event) => new Date(event.timestamp) <= dateFilters.dateTo!)
     }
 
+=======
+>>>>>>> 635fb68316ea188d00a1ccbf846d7710502b0e5a
     filtered.sort((a, b) => {
       const valA = a[sort.key]
       const valB = b[sort.key]
@@ -156,11 +206,18 @@ export default function EventList({ events, filters, setFilters, statusFilter }:
     })
 
     return filtered
+<<<<<<< HEAD
   }, [events, multiFilters, sort, statusFilter, dateFilters, eventStatuses])
 
   const resetFilters = () => {
     setMultiFilters({ severity: [], actionStatus: [], search: "" })
     setDateFilters({ dateFrom: undefined, dateTo: undefined })
+=======
+  }, [events, filters, sort, statusFilter])
+
+  const resetFilters = () => {
+    setFilters({ severity: "", type: "", search: "" })
+>>>>>>> 635fb68316ea188d00a1ccbf846d7710502b0e5a
   }
 
   const getSeverityBadge = (severity: string) => {
@@ -185,6 +242,7 @@ export default function EventList({ events, filters, setFilters, statusFilter }:
   }
 
   const getDetailedActions = (severity: string) => {
+<<<<<<< HEAD
     const severityKey = severity?.toLowerCase()
 
     switch (severityKey) {
@@ -442,12 +500,109 @@ export default function EventList({ events, filters, setFilters, statusFilter }:
             placeholder="Action Status"
             className="w-[180px]"
           />
+=======
+    const severityKey = severity?.toLowerCase() as keyof typeof recommendationsData
+    const recommendations = recommendationsData[severityKey]
+
+    if (!recommendations || recommendations.length === 0) {
+      return {
+        title: "No Actions Required",
+        actions: ["No specific actions needed at this time."],
+      }
+    }
+
+    const actionDetails: Record<string, { title: string; actions: string[] }> = {
+      critical: {
+        title: "Critical Security Response",
+        actions: [
+          "Immediately isolate the affected system from the network",
+          "Contact the security team and incident response coordinator",
+          "Document all current system states and network connections",
+          "Begin forensic data collection before any remediation",
+          "Notify relevant stakeholders and management",
+          "Activate emergency response procedures",
+          "Monitor for lateral movement or additional compromised systems",
+        ],
+      },
+      warning: {
+        title: "Security Monitoring Required",
+        actions: [
+          "Increase monitoring frequency for the affected system",
+          "Review recent access logs and user activities",
+          "Check for unusual network traffic patterns",
+          "Verify system configurations against security baselines",
+          "Schedule security assessment within 24 hours",
+          "Update threat intelligence feeds",
+          "Prepare incident response team for potential escalation",
+        ],
+      },
+      notice: {
+        title: "Routine Security Review",
+        actions: [
+          "Review system logs for any anomalies",
+          "Verify compliance with security policies",
+          "Update security documentation if needed",
+          "Schedule routine security assessment",
+          "Check for available security updates",
+          "Review user access permissions",
+          "Document findings in security log",
+        ],
+      },
+    }
+
+    return (
+      actionDetails[severityKey] || {
+        title: "General Review",
+        actions: ["Review the event and take appropriate action based on your security policies."],
+      }
+    )
+  }
+
+  return (
+    <Card>
+      <CardHeader>
+        <CardTitle>Event List</CardTitle>
+      </CardHeader>
+      <CardContent>
+        <div className="flex flex-wrap gap-4 mb-4">
+          <Input
+            placeholder="Search events..."
+            value={filters.search}
+            onChange={(e) => setFilters((f) => ({ ...f, search: e.target.value }))}
+            className="max-w-sm"
+          />
+          <Select value={filters.severity} onValueChange={(v) => setFilters((f) => ({ ...f, severity: v }))}>
+            <SelectTrigger className="w-[180px]">
+              <SelectValue placeholder="Severity" />
+            </SelectTrigger>
+            <SelectContent>
+              <SelectItem value="critical">Critical</SelectItem>
+              <SelectItem value="warning">Warning</SelectItem>
+              <SelectItem value="notice">Notice</SelectItem>
+            </SelectContent>
+          </Select>
+          <Select value={filters.type} onValueChange={(v) => setFilters((f) => ({ ...f, type: v }))}>
+            <SelectTrigger className="w-[180px]">
+              <SelectValue placeholder="Type" />
+            </SelectTrigger>
+            <SelectContent>
+              <SelectItem value="Infra">Infra</SelectItem>
+              <SelectItem value="Security">Security</SelectItem>
+              <SelectItem value="Network">Network</SelectItem>
+              <SelectItem value="Application">Application</SelectItem>
+            </SelectContent>
+          </Select>
+>>>>>>> 635fb68316ea188d00a1ccbf846d7710502b0e5a
           <Button variant="outline" onClick={resetFilters}>
             <X className="mr-2 h-4 w-4" /> Reset
           </Button>
         </div>
         <div className="overflow-x-auto max-h-[400px]">
+<<<<<<< HEAD
           <Table className="min-w-[900px]">
+=======
+          <Table className="min-w-[800px]">
+>>>>>>> 635fb68316ea188d00a1ccbf846d7710502b0e5a
             <TableHeader className="sticky top-0 bg-muted">
               <TableRow>
                 <TableHead onClick={() => handleSort("timestamp")} className="cursor-pointer w-[140px]">
@@ -456,20 +611,35 @@ export default function EventList({ events, filters, setFilters, statusFilter }:
                 <TableHead onClick={() => handleSort("severity")} className="cursor-pointer w-[100px]">
                   Severity <ArrowUpDown className="ml-2 h-4 w-4 inline" />
                 </TableHead>
+<<<<<<< HEAD
                 <TableHead className="w-[150px]">Event Name</TableHead>
                 <TableHead className="w-[200px]">Descriptions</TableHead>
                 <TableHead className="w-[120px]">Action Status</TableHead>
                 <TableHead className="w-[110px]">Details</TableHead>
+=======
+                <TableHead onClick={() => handleSort("type")} className="cursor-pointer w-[100px]">
+                  Type <ArrowUpDown className="ml-2 h-4 w-4 inline" />
+                </TableHead>
+                <TableHead className="w-[150px]">Event Name</TableHead>
+                <TableHead className="w-[200px]">Details</TableHead>
+                <TableHead className="w-[110px]">Actions</TableHead>
+>>>>>>> 635fb68316ea188d00a1ccbf846d7710502b0e5a
               </TableRow>
             </TableHeader>
             <TableBody>
               {filteredAndSortedEvents.map((event, index) => {
+<<<<<<< HEAD
                 const eventKey = `${event.timestamp}-${index}`
                 const currentStatus = eventStatuses[eventKey] || "Not started"
                 const isLoading = loadingEvents.has(eventKey)
 
                 return (
                   <TableRow key={eventKey}>
+=======
+                const actionDetails = getDetailedActions(event.severity)
+                return (
+                  <TableRow key={`${event.timestamp}-${index}`}>
+>>>>>>> 635fb68316ea188d00a1ccbf846d7710502b0e5a
                     <TableCell className="w-[140px]">
                       {new Date(event.timestamp).toLocaleString("en-GB", {
                         year: "numeric",
@@ -482,6 +652,7 @@ export default function EventList({ events, filters, setFilters, statusFilter }:
                       })}
                     </TableCell>
                     <TableCell className="w-[100px]">{getSeverityBadge(event.severity)}</TableCell>
+<<<<<<< HEAD
                     <TableCell className="w-[150px]">{event.eventName}</TableCell>
                     <TableCell className="w-[200px] whitespace-normal break-words">{event.details}</TableCell>
                     <TableCell className="w-[120px]">
@@ -518,6 +689,51 @@ export default function EventList({ events, filters, setFilters, statusFilter }:
                       >
                         View
                       </Button>
+=======
+                    <TableCell className="w-[100px]">{event.type}</TableCell>
+                    <TableCell className="w-[150px]">{event.eventName}</TableCell>
+                    <TableCell className="w-[200px] whitespace-normal break-words">{event.details}</TableCell>
+                    <TableCell className="w-[110px]">
+                      <Dialog>
+                        <DialogTrigger asChild>
+                          <Button
+                            variant="ghost"
+                            size="sm"
+                            className="text-blue-600 dark:text-blue-400 hover:text-blue-800 dark:hover:text-blue-300 p-0 h-auto font-medium"
+                          >
+                            {getRecommendations(event.severity)}
+                          </Button>
+                        </DialogTrigger>
+                        <DialogContent className="max-w-2xl">
+                          <DialogHeader>
+                            <DialogTitle className="flex items-center gap-2">
+                              {getSeverityBadge(event.severity)}
+                              {actionDetails.title}
+                            </DialogTitle>
+                            <DialogDescription>
+                              Event: {event.eventName} | Type: {event.type}
+                            </DialogDescription>
+                          </DialogHeader>
+                          <div className="space-y-4">
+                            <div>
+                              <h4 className="font-semibold mb-2">Event Details:</h4>
+                              <p className="text-sm text-muted-foreground bg-muted p-3 rounded">{event.details}</p>
+                            </div>
+                            <div>
+                              <h4 className="font-semibold mb-3">Recommended Actions:</h4>
+                              <ul className="space-y-2">
+                                {actionDetails.actions.map((action, idx) => (
+                                  <li key={idx} className="flex items-start gap-2">
+                                    <span className="text-blue-600 dark:text-blue-400 font-bold mt-1">•</span>
+                                    <span className="text-sm">{action}</span>
+                                  </li>
+                                ))}
+                              </ul>
+                            </div>
+                          </div>
+                        </DialogContent>
+                      </Dialog>
+>>>>>>> 635fb68316ea188d00a1ccbf846d7710502b0e5a
                     </TableCell>
                   </TableRow>
                 )
@@ -525,6 +741,7 @@ export default function EventList({ events, filters, setFilters, statusFilter }:
             </TableBody>
           </Table>
         </div>
+<<<<<<< HEAD
         <ActionResponseGuidePopup
           isOpen={actionGuideOpen}
           onClose={() => setActionGuideOpen(false)}
@@ -533,6 +750,8 @@ export default function EventList({ events, filters, setFilters, statusFilter }:
           ruleQuery={selectedEventData?.ruleQuery}
           investigationGuide={selectedEventData?.investigationGuide}
         />
+=======
+>>>>>>> 635fb68316ea188d00a1ccbf846d7710502b0e5a
       </CardContent>
     </Card>
   )

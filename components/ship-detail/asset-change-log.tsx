@@ -4,12 +4,18 @@ import * as React from "react"
 import type { ChangeLog } from "@/lib/data"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table"
+<<<<<<< HEAD
 import { Button } from "@/components/ui/button"
 import { ArrowUpDown, X, Calendar } from "lucide-react"
 import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover"
 import { Calendar as CalendarComponent } from "@/components/ui/calendar"
 import { format } from "date-fns"
 import { MultiSelect } from "@/components/ui/multi-select"
+=======
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
+import { Button } from "@/components/ui/button"
+import { ArrowUpDown, X } from "lucide-react"
+>>>>>>> 635fb68316ea188d00a1ccbf846d7710502b0e5a
 
 interface AssetChangeLogProps {
   changeLogs: ChangeLog[]
@@ -18,12 +24,16 @@ interface AssetChangeLogProps {
 type SortKey = keyof ChangeLog | null
 
 export default function AssetChangeLog({ changeLogs }: AssetChangeLogProps) {
+<<<<<<< HEAD
   const [filters, setFilters] = React.useState({
     targetType: [] as string[],
     changeType: [] as string[],
     dateFrom: undefined as Date | undefined,
     dateTo: undefined as Date | undefined,
   })
+=======
+  const [filters, setFilters] = React.useState({ targetType: "", changeType: "" })
+>>>>>>> 635fb68316ea188d00a1ccbf846d7710502b0e5a
   const [sort, setSort] = React.useState<{ key: SortKey; direction: "asc" | "desc" }>({
     key: "timestamp",
     direction: "desc",
@@ -40,6 +50,7 @@ export default function AssetChangeLog({ changeLogs }: AssetChangeLogProps) {
   const filteredAndSortedLogs = React.useMemo(() => {
     let logs = [...changeLogs]
 
+<<<<<<< HEAD
     if (filters.targetType.length > 0) {
       logs = logs.filter((log) => filters.targetType.includes(log.targetType))
     }
@@ -51,6 +62,13 @@ export default function AssetChangeLog({ changeLogs }: AssetChangeLogProps) {
     }
     if (filters.dateTo) {
       logs = logs.filter((log) => new Date(log.timestamp) <= filters.dateTo!)
+=======
+    if (filters.targetType) {
+      logs = logs.filter((log) => log.targetType === filters.targetType)
+    }
+    if (filters.changeType) {
+      logs = logs.filter((log) => log.changeType === filters.changeType)
+>>>>>>> 635fb68316ea188d00a1ccbf846d7710502b0e5a
     }
 
     if (sort.key) {
@@ -79,6 +97,7 @@ export default function AssetChangeLog({ changeLogs }: AssetChangeLogProps) {
   }, [changeLogs, filters, sort])
 
   const resetFilters = () => {
+<<<<<<< HEAD
     setFilters({ targetType: [], changeType: [], dateFrom: undefined, dateTo: undefined })
   }
 
@@ -94,6 +113,11 @@ export default function AssetChangeLog({ changeLogs }: AssetChangeLogProps) {
     { label: "Updated", value: "Updated" },
   ]
 
+=======
+    setFilters({ targetType: "", changeType: "" })
+  }
+
+>>>>>>> 635fb68316ea188d00a1ccbf846d7710502b0e5a
   return (
     <Card>
       <CardHeader>
@@ -101,6 +125,7 @@ export default function AssetChangeLog({ changeLogs }: AssetChangeLogProps) {
       </CardHeader>
       <CardContent>
         <div className="flex flex-wrap gap-4 mb-4">
+<<<<<<< HEAD
           <Popover>
             <PopoverTrigger asChild>
               <Button
@@ -157,6 +182,30 @@ export default function AssetChangeLog({ changeLogs }: AssetChangeLogProps) {
           />
           <Button variant="outline" onClick={resetFilters} className="h-8 text-xs px-2 bg-transparent">
             <X className="mr-1 h-3 w-3" /> Reset
+=======
+          <Select value={filters.targetType} onValueChange={(v) => setFilters((f) => ({ ...f, targetType: v }))}>
+            <SelectTrigger className="w-[180px]">
+              <SelectValue placeholder="Target Type" />
+            </SelectTrigger>
+            <SelectContent>
+              <SelectItem value="HW">HW</SelectItem>
+              <SelectItem value="SW">SW</SelectItem>
+            </SelectContent>
+          </Select>
+          <Select value={filters.changeType} onValueChange={(v) => setFilters((f) => ({ ...f, changeType: v }))}>
+            <SelectTrigger className="w-[180px]">
+              <SelectValue placeholder="Change Type" />
+            </SelectTrigger>
+            <SelectContent>
+              <SelectItem value="Added">Added</SelectItem>
+              <SelectItem value="Changed">Changed</SelectItem>
+              <SelectItem value="Deleted">Deleted</SelectItem>
+              <SelectItem value="Updated">Updated</SelectItem>
+            </SelectContent>
+          </Select>
+          <Button variant="outline" onClick={resetFilters}>
+            <X className="mr-2 h-4 w-4" /> Reset
+>>>>>>> 635fb68316ea188d00a1ccbf846d7710502b0e5a
           </Button>
         </div>
         <div className="overflow-x-auto max-h-[400px]">

@@ -18,6 +18,10 @@ interface NetworkNode {
   type: "server" | "switch" | "router" | "firewall" | "pc" | "sensor"
   label: string
   ip?: string
+<<<<<<< HEAD
+=======
+  status: "online" | "offline" | "warning"
+>>>>>>> 635fb68316ea188d00a1ccbf846d7710502b0e5a
 }
 
 interface NetworkConnection {
@@ -60,10 +64,17 @@ export default function GuiEditorPage() {
   const [savedTopologies, setSavedTopologies] = useState<ShipTopology[]>([])
 
   const [nodes, setNodes] = useState<NetworkNode[]>([
+<<<<<<< HEAD
     { id: "1", x: 200, y: 150, type: "server", label: "Main Server", ip: "192.168.1.10" },
     { id: "2", x: 400, y: 150, type: "switch", label: "Core Switch", ip: "192.168.1.1" },
     { id: "3", x: 600, y: 100, type: "router", label: "Gateway Router", ip: "192.168.1.254" },
     { id: "4", x: 600, y: 200, type: "firewall", label: "Security FW", ip: "192.168.1.2" },
+=======
+    { id: "1", x: 200, y: 150, type: "server", label: "Main Server", ip: "192.168.1.10", status: "online" },
+    { id: "2", x: 400, y: 150, type: "switch", label: "Core Switch", ip: "192.168.1.1", status: "online" },
+    { id: "3", x: 600, y: 100, type: "router", label: "Gateway Router", ip: "192.168.1.254", status: "online" },
+    { id: "4", x: 600, y: 200, type: "firewall", label: "Security FW", ip: "192.168.1.2", status: "warning" },
+>>>>>>> 635fb68316ea188d00a1ccbf846d7710502b0e5a
   ])
 
   const [connections, setConnections] = useState<NetworkConnection[]>([
@@ -171,6 +182,10 @@ export default function GuiEditorPage() {
           type: "server",
           label: `Node ${nodes.length + 1}`,
           ip: `192.168.1.${10 + nodes.length}`, // Default IP address
+<<<<<<< HEAD
+=======
+          status: "online",
+>>>>>>> 635fb68316ea188d00a1ccbf846d7710502b0e5a
         }
         setNodes([...nodes, newNode])
         setMode("select")
@@ -210,8 +225,16 @@ export default function GuiEditorPage() {
     }
   }
 
+<<<<<<< HEAD
   const getNodeColor = (type: string) => {
     return nodeTypes.find((t) => t.value === type)?.color || "#6b7280"
+=======
+  const getNodeColor = (type: string, status: string) => {
+    const baseColor = nodeTypes.find((t) => t.value === type)?.color || "#6b7280"
+    if (status === "offline") return "#6b7280"
+    if (status === "warning") return "#f59e0b"
+    return baseColor
+>>>>>>> 635fb68316ea188d00a1ccbf846d7710502b0e5a
   }
 
   const saveToShip = () => {
@@ -514,6 +537,25 @@ export default function GuiEditorPage() {
                       placeholder="192.168.1.1"
                     />
                   </div>
+<<<<<<< HEAD
+=======
+                  <div>
+                    <Label className="text-xs">Status</Label>
+                    <Select
+                      value={selectedNode.status}
+                      onValueChange={(value) => updateNode(selectedNode.id, { status: value as any })}
+                    >
+                      <SelectTrigger>
+                        <SelectValue />
+                      </SelectTrigger>
+                      <SelectContent>
+                        <SelectItem value="online">Online</SelectItem>
+                        <SelectItem value="offline">Offline</SelectItem>
+                        <SelectItem value="warning">Warning</SelectItem>
+                      </SelectContent>
+                    </Select>
+                  </div>
+>>>>>>> 635fb68316ea188d00a1ccbf846d7710502b0e5a
                   <Button
                     variant="destructive"
                     size="sm"
@@ -750,7 +792,11 @@ export default function GuiEditorPage() {
                   >
                     <div
                       className="w-12 h-12 rounded-lg border-2 border-white shadow-lg flex items-center justify-center text-white font-bold text-xs"
+<<<<<<< HEAD
                       style={{ backgroundColor: getNodeColor(node.type) }}
+=======
+                      style={{ backgroundColor: getNodeColor(node.type, node.status) }}
+>>>>>>> 635fb68316ea188d00a1ccbf846d7710502b0e5a
                     >
                       {node.type.charAt(0).toUpperCase()}
                     </div>

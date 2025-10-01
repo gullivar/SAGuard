@@ -61,7 +61,10 @@ export interface DetectionEvent {
   rawDataReference: string
   elasticRuleId: string
   description: string
+<<<<<<< HEAD
   actionStatus: "Not started" | "In progress" | "Completed"
+=======
+>>>>>>> 635fb68316ea188d00a1ccbf846d7710502b0e5a
 }
 
 export interface Ship {
@@ -206,7 +209,10 @@ export function generateShipData(): Ship[] {
     const numEvents = 30 + Math.floor(Math.random() * 50)
     const eventTypes = ["Infra", "Security", "Network", "Application"]
     const severities = ["critical", "warning", "notice"]
+<<<<<<< HEAD
     const actionStatuses = ["Not started", "In progress", "Completed"]
+=======
+>>>>>>> 635fb68316ea188d00a1ccbf846d7710502b0e5a
 
     for (let j = 0; j < numEvents; j++) {
       const severity = getRandomElement(severities)
@@ -218,7 +224,10 @@ export function generateShipData(): Ship[] {
         severity: severity,
         eventName: `${severity.charAt(0).toUpperCase() + severity.slice(1)} Event ${j}`,
         details: `Details for event number ${j}. This is a mock description of what happened.`,
+<<<<<<< HEAD
         actionStatus: getRandomElement(actionStatuses),
+=======
+>>>>>>> 635fb68316ea188d00a1ccbf846d7710502b0e5a
       })
     }
 
@@ -691,7 +700,10 @@ export function generateDetectionEvents(): DetectionEvent[] {
     "Resolved",
     "False Positive",
   ]
+<<<<<<< HEAD
   const actionStatuses: DetectionEvent["actionStatus"][] = ["Not started", "In progress", "Completed"]
+=======
+>>>>>>> 635fb68316ea188d00a1ccbf846d7710502b0e5a
 
   // Generate detection events for last 90 days (more realistic for security monitoring)
   for (let i = 0; i < 50; i++) {
@@ -700,7 +712,10 @@ export function generateDetectionEvents(): DetectionEvent[] {
     const sourceDevice = getRandomElement(sourceDeviceTypes)
     const severityLevel = getRandomElement(severityLevels)
     const investigationStatus = getRandomElement(investigationStatuses)
+<<<<<<< HEAD
     const actionStatus = getRandomElement(actionStatuses)
+=======
+>>>>>>> 635fb68316ea188d00a1ccbf846d7710502b0e5a
 
     // Generate detection time within last 90 days
     const detectionTime = new Date(Date.now() - Math.random() * 90 * 24 * 60 * 60 * 1000).toISOString()
@@ -729,7 +744,10 @@ export function generateDetectionEvents(): DetectionEvent[] {
       rawDataReference: `resource-${Math.floor(1 + Math.random() * 250)}`,
       elasticRuleId: rule.id,
       description: rule.description,
+<<<<<<< HEAD
       actionStatus,
+=======
+>>>>>>> 635fb68316ea188d00a1ccbf846d7710502b0e5a
     })
   }
 

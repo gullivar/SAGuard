@@ -2,6 +2,10 @@
   "name": "my-v0-project",
   "version": "0.1.0",
   "private": true,
+<<<<<<< HEAD
+=======
+  "homepage": "https://gullivar.github.io/SAGuard",
+>>>>>>> 635fb68316ea188d00a1ccbf846d7710502b0e5a
   "scripts": {
     "build": "next build",
     "dev": "next dev",
@@ -59,7 +63,10 @@
     "react-hook-form": "^7.60.0",
     "react-leaflet": "latest",
     "react-leaflet-cluster": "latest",
+<<<<<<< HEAD
     "react-markdown": "latest",
+=======
+>>>>>>> 635fb68316ea188d00a1ccbf846d7710502b0e5a
     "react-resizable-panels": "^2.1.7",
     "recharts": "latest",
     "sonner": "^1.7.4",
@@ -82,4 +89,8 @@
     "tw-animate-css": "1.3.3",
     "typescript": "^5"
   }
+<<<<<<< HEAD
 }
+=======
+}
+>>>>>>> 635fb68316ea188d00a1ccbf846d7710502b0e5a
